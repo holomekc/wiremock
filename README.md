@@ -80,3 +80,4 @@ Images
 [Separated View](./images/mappings-separated.png)
 
 [StateMachine](./images/state-machine.png)
+
