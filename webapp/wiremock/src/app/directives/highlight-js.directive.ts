@@ -1,5 +1,6 @@
-import {Directive, ElementRef, Input, NgZone, OnChanges, SimpleChanges} from '@angular/core';
-import {UtilService} from '../services/util.service';
+import { Directive, ElementRef, Input, NgZone, OnChanges, SecurityContext, SimpleChanges } from "@angular/core";
+import { UtilService } from "../services/util.service";
+import { DomSanitizer } from "@angular/platform-browser";
 
 declare const hljs: any;
 
@@ -14,7 +15,7 @@ export class HighlightJsDirective implements OnChanges {
   @Input()
   language: string;
 
-  constructor(private elementRef: ElementRef, private zone: NgZone) {
+  constructor(private elementRef: ElementRef, private zone: NgZone, private sanitizer: DomSanitizer) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,7 +31,7 @@ export class HighlightJsDirective implements OnChanges {
     code.classList.add('hljs');
 
     if (UtilService.isUndefined(this.wmHighlightJs) || this.wmHighlightJs.length === 0) {
-      code.innerHTML = '';
+      code.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, '');
       return;
     }
 
@@ -40,9 +41,9 @@ export class HighlightJsDirective implements OnChanges {
 
     if (highlighted.language === 'json' || highlighted.language === 'xml' ||
       highlighted.language === 'http' || highlighted.language === 'html') {
-      code.innerHTML = highlighted.value;
+      code.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, highlighted.value);
     } else {
-      code.innerHTML = prettyCode;
+      code.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, prettyCode);
     }
   }
 
