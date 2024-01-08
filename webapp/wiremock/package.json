@@ -71,7 +71,7 @@
     "@types/graphlib": "2.1.12",
     "@types/dagre": "0.7.52",
     "@types/mime-db": "1.43.5",
-    "@typescript-eslint/eslint-plugin": "6.17.0",
+    "@typescript-eslint/eslint-plugin": "6.18.0",
     "@typescript-eslint/parser": "6.18.0",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
