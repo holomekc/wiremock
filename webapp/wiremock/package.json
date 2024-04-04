@@ -65,7 +65,7 @@
     "@angular/localize": "17.3.3",
     "@types/backbone": "1.4.19",
     "@types/jasmine": "5.1.4",
-    "@types/node": "20.12.3",
+    "@types/node": "20.12.4",
     "@types/uuid": "9.0.8",
     "@types/vkbeautify": "0.99.4",
     "@types/graphlib": "2.1.12",
