@@ -1,4 +1,4 @@
-FROM wiremock/wiremock:3.5.2-1
+FROM wiremock/wiremock:3.5.3-1
 
 LABEL maintainer="Christopher Holomek <holomekc.github@gmail.com>"
 LABEL org.label-schema.name="wiremock-gui"
