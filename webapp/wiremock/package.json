@@ -40,7 +40,7 @@
     "bootstrap": "5.3.3",
     "dagre": "0.8.5",
     "graphlib": "2.1.8",
-    "ngx-highlightjs": "10.0.0",
+    "ngx-highlightjs": "12.0.0",
     "jointjs": "3.7.7",
     "jquery": "3.7.1",
     "lodash": "4.17.21",
