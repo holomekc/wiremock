@@ -6,7 +6,6 @@ import { UtilService } from "../services/util.service";
   name: "isObject",
 })
 export class IsObjectPipe implements PipeTransform {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transform(value: KeyValue[]): any {
     const result: KeyValue[] = [];
 

@@ -8,7 +8,6 @@ export class RecordingStatusResult {
     return this;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private deserializeStatus(unchecked: any): RecordingStatus {
     switch (unchecked) {
       case "NeverStarted":

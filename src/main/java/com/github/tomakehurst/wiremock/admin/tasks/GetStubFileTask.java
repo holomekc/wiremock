@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 Thomas Akehurst
+ * Copyright (C) 2016-2024 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,31 @@
  */
 package com.github.tomakehurst.wiremock.admin.tasks;
 
-import static com.github.tomakehurst.wiremock.core.WireMockApp.FILES_ROOT;
+import static java.net.HttpURLConnection.HTTP_OK;
 
 import com.github.tomakehurst.wiremock.admin.AdminTask;
-import com.github.tomakehurst.wiremock.common.Errors;
-import com.github.tomakehurst.wiremock.common.FileSource;
-import com.github.tomakehurst.wiremock.common.TextFile;
 import com.github.tomakehurst.wiremock.common.url.PathParams;
 import com.github.tomakehurst.wiremock.core.Admin;
 import com.github.tomakehurst.wiremock.http.ResponseDefinition;
+import com.github.tomakehurst.wiremock.store.Stores;
 import com.github.tomakehurst.wiremock.stubbing.ServeEvent;
+import java.util.Optional;
 
-public class GetStubFilesTask implements AdminTask {
+public class GetStubFileTask implements AdminTask {
+
+  private final Stores stores;
+
+  public GetStubFileTask(Stores stores) {
+    this.stores = stores;
+  }
+
   @Override
-  public ResponseDefinition execute(
-      final Admin admin, final ServeEvent serveEvent, final PathParams pathParams) {
-    try {
-      final FileSource fileSource = admin.getOptions().filesRoot().child(FILES_ROOT);
-      final TextFile textFile = fileSource.getTextFileNamed(pathParams.get("0"));
-      return ResponseDefinition.okForJson(textFile.readContentsAsString());
-    } catch (final Exception e) {
-      return ResponseDefinition.badRequest(Errors.single(60, "Could not find specified file."));
-    }
+  public ResponseDefinition execute(Admin admin, ServeEvent serveEvent, PathParams pathParams) {
+    String filename = pathParams.get("0");
+    Optional<byte[]> fileContents = stores.getFilesBlobStore().get(filename);
+
+    return fileContents
+        .map(bytes -> new ResponseDefinition(HTTP_OK, bytes))
+        .orElseGet(ResponseDefinition::notFound);
   }
 }

@@ -96,7 +96,6 @@ export class SeparatedComponent implements OnChanges {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   isObject(property: any): boolean {
     return typeof property === "object";
   }

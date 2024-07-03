@@ -220,7 +220,6 @@ export class MappingsComponent implements OnInit, OnDestroy, WebSocketListener {
   }
 
   // ##### HELPER #####
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private showHelperErrorMessage(err: any) {
     this.messageService.setMessage(
       new Message(

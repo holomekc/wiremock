@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2023 Thomas Akehurst
+ * Copyright (C) 2015-2024 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.github.tomakehurst.wiremock.common.AdminException;
 import com.github.tomakehurst.wiremock.extension.Parameters;
 import com.github.tomakehurst.wiremock.http.Request;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
+import com.github.tomakehurst.wiremock.matching.CustomMatcherDefinition;
 import com.github.tomakehurst.wiremock.matching.MatchResult;
 import com.github.tomakehurst.wiremock.matching.RequestMatcher;
 import com.github.tomakehurst.wiremock.matching.RequestMatcherExtension;
@@ -40,7 +41,11 @@ public class CustomMatchingAcceptanceTest {
   @RegisterExtension
   public WireMockExtension wmRule =
       WireMockExtension.newInstance()
-          .options(options().dynamicPort().extensions(MyExtensionRequestMatcher.class))
+          .options(
+              options()
+                  .dynamicPort()
+                  .extensions(
+                      MyExtensionRequestMatcher.class, MyPathParameterAwareRequestMatcher.class))
           .failOnUnmatchedRequests(false)
           .build();
 
@@ -112,7 +117,45 @@ public class CustomMatchingAcceptanceTest {
   }
 
   @Test
-  public void throwsExecptionIfInlineCustomMatcherUsedWithRemote() {
+  public void customMatcherDefinitionCanBeCombinedWithStandardMatchers() {
+    wm.register(
+        get(urlPathMatching("/the/.*/one"))
+            .andMatching(
+                new CustomMatcherDefinition(
+                    "path-contains-param", Parameters.one("path", "correct")))
+            .willReturn(ok()));
+
+    assertThat(client.get("/the/correct/one").statusCode(), is(200));
+    assertThat(client.get("/the/wrong/one").statusCode(), is(404));
+    assertThat(client.postJson("/the/correct/one", "{}").statusCode(), is(404));
+  }
+
+  @Test
+  void customMatcherCanMakeUseOfPathParameters() {
+    wm.register(
+        get(urlPathTemplate("/things/{thingId}"))
+            .andMatching("path-aware-matcher")
+            .willReturn(ok()));
+
+    assertThat(client.get("/things/123").statusCode(), is(200));
+    assertThat(client.get("/things/456").statusCode(), is(404));
+  }
+
+  @Test
+  void customMatcherCanBeUsedDuringVerification() {
+    client.get("/things/123");
+    wm.verifyThat(
+        getRequestedFor(urlPathTemplate("/things/{thingId}")).andMatching("path-aware-matcher"));
+
+    wm.resetRequests();
+
+    client.get("/things/456");
+    wm.verifyThat(
+        0, getRequestedFor(urlPathTemplate("/things/{thingId}")).andMatching("path-aware-matcher"));
+  }
+
+  @Test
+  public void throwsExceptionIfInlineCustomMatcherUsedWithRemote() {
     assertThrows(
         AdminException.class,
         () ->
@@ -141,6 +184,19 @@ public class CustomMatchingAcceptanceTest {
     @Override
     public String getName() {
       return "path-contains-param";
+    }
+  }
+
+  public static class MyPathParameterAwareRequestMatcher extends RequestMatcherExtension {
+
+    @Override
+    public String getName() {
+      return "path-aware-matcher";
+    }
+
+    @Override
+    public MatchResult match(Request request, Parameters parameters) {
+      return MatchResult.of("123".equals(request.getPathParameters().get("thingId")));
     }
   }
 }

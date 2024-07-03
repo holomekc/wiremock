@@ -80,7 +80,6 @@ export class ReconnectWebSocket {
     return this.webSocket.readyState;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   send(data: any) {
     this.webSocket.send(data);
   }

@@ -71,14 +71,9 @@ export class CodeEditorComponent implements OnInit, OnChanges, AfterViewInit, On
   _code!: string;
 
   @Input()
-  set code(value: string | undefined) {
+  set code(value: any | undefined) {
     if (this._code !== value) {
-      if (UtilService.isUndefined(value)) {
-        this._code = "";
-      } else {
-        // prettify with cast to string. Due to javascript type in-safety
-        this._code = UtilService.prettify(value) + "";
-      }
+      this._code = UtilService.prettify(value);
       this.setEditorValue();
     }
   }
@@ -158,10 +153,8 @@ export class CodeEditorComponent implements OnInit, OnChanges, AfterViewInit, On
     if (this.editor) {
       this.editor.setOptions(this.options);
       if (this.options.readOnly) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (this.editor.renderer as any).$cursorLayer.element.style.display = "none";
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (this.editor.renderer as any).$cursorLayer.element.style.display = "block";
       }
     }

@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "splitCamelCase",
 })
 export class SplitCamelCasePipe implements PipeTransform {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transform(value: string | undefined): string {
     if (!value) {
       return "";

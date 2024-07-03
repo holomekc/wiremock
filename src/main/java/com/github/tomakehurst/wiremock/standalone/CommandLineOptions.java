@@ -66,6 +66,7 @@ public class CommandLineOptions implements Options {
   private static final String MATCH_HEADERS = "match-headers";
   private static final String PROXY_ALL = "proxy-all";
   private static final String PRESERVE_HOST_HEADER = "preserve-host-header";
+  private static final String PRESERVE_USER_AGENT_PROXY_HEADER = "preserve-user-agent-proxy-header";
   private static final String PROXY_VIA = "proxy-via";
   private static final String TIMEOUT = "timeout";
   private static final String PORT = "port";
@@ -126,8 +127,10 @@ public class CommandLineOptions implements Options {
   private static final String ALLOW_PROXY_TARGETS = "allow-proxy-targets";
   private static final String DENY_PROXY_TARGETS = "deny-proxy-targets";
   private static final String PROXY_TIMEOUT = "proxy-timeout";
-
+  private static final String MAX_HTTP_CLIENT_CONNECTIONS = "max-http-client-connections";
+  private static final String DISABLE_CONNECTION_REUSE = "disable-connection-reuse";
   private static final String PROXY_PASS_THROUGH = "proxy-pass-through";
+  private static final String SUPPORTED_PROXY_ENCODINGS = "supported-proxy-encodings";
 
   private final OptionSet optionSet;
 
@@ -211,6 +214,9 @@ public class CommandLineOptions implements Options {
     optionParser.accepts(
         PRESERVE_HOST_HEADER,
         "Will transfer the original host header from the client to the proxied service");
+    optionParser.accepts(
+        PRESERVE_USER_AGENT_PROXY_HEADER,
+        "Will transfer the original User-Agent header from the client to the proxied service");
     optionParser
         .accepts(PROXY_VIA, "Specifies a proxy server to use when routing proxy mapped requests")
         .withRequiredArg();
@@ -371,7 +377,7 @@ public class CommandLineOptions implements Options {
     optionParser
         .accepts(
             DENY_PROXY_TARGETS,
-            "Comma separated list of IP addresses, IP ranges (hyphenated) and domain name wildcards that cannot be proxied to/recorded from. Is evaluated after the list of allowed addresses.")
+            "Comma-separated list of IP addresses, IP ranges (hyphenated) and domain name wildcards that cannot be proxied to/recorded from. Is evaluated after the list of allowed addresses.")
         .withRequiredArg();
     optionParser
         .accepts(PROXY_TIMEOUT, "Timeout in milliseconds for requests to proxy")
@@ -379,6 +385,20 @@ public class CommandLineOptions implements Options {
     optionParser
         .accepts(PROXY_PASS_THROUGH, "Flag to control browser proxy pass through")
         .withRequiredArg();
+    optionParser
+        .accepts(MAX_HTTP_CLIENT_CONNECTIONS, "Maximum connections for Http Client")
+        .withRequiredArg();
+    optionParser
+        .accepts(DISABLE_CONNECTION_REUSE, "Disable http connection reuse")
+        .withRequiredArg();
+    optionParser
+        .accepts(
+            SUPPORTED_PROXY_ENCODINGS,
+            "Comma-separated list of supported accept-encoding values for use when proxying and recording")
+        .withRequiredArg()
+        .ofType(String.class)
+        .withValuesSeparatedBy(",");
+
     optionParser.accepts(VERSION, "Prints wiremock version information and exits");
 
     optionParser.accepts(HELP, "Print this message").forHelp();
@@ -662,6 +682,11 @@ public class CommandLineOptions implements Options {
   }
 
   @Override
+  public boolean shouldPreserveUserAgentProxyHeader() {
+    return optionSet.has(PRESERVE_USER_AGENT_PROXY_HEADER);
+  }
+
+  @Override
   public String proxyHostHeader() {
     return optionSet.hasArgument(PROXY_ALL)
         ? URI.create((String) optionSet.valueOf(PROXY_ALL)).getAuthority()
@@ -806,6 +831,7 @@ public class CommandLineOptions implements Options {
     if (proxyUrl() != null) {
       map.put(PROXY_ALL, nullToString(proxyUrl()));
       map.put(PRESERVE_HOST_HEADER, shouldPreserveHostHeader());
+      map.put(PRESERVE_USER_AGENT_PROXY_HEADER, shouldPreserveUserAgentProxyHeader());
     }
 
     BrowserProxySettings browserProxySettings = browserProxySettings();
@@ -970,6 +996,13 @@ public class CommandLineOptions implements Options {
   }
 
   @Override
+  public int getMaxHttpClientConnections() {
+    return optionSet.has(MAX_HTTP_CLIENT_CONNECTIONS)
+        ? Integer.parseInt((String) optionSet.valueOf(MAX_HTTP_CLIENT_CONNECTIONS))
+        : DEFAULT_MAX_HTTP_CONNECTIONS;
+  }
+
+  @Override
   public boolean getResponseTemplatingEnabled() {
     return !optionSet.has(DISABLE_RESPONSE_TEMPLATING);
   }
@@ -982,8 +1015,8 @@ public class CommandLineOptions implements Options {
   @Override
   public Long getMaxTemplateCacheEntries() {
     return optionSet.has(MAX_TEMPLATE_CACHE_ENTRIES)
-        ? Long.valueOf(optionSet.valueOf(MAX_TEMPLATE_CACHE_ENTRIES).toString())
-        : null;
+        ? Long.parseLong(optionSet.valueOf(MAX_TEMPLATE_CACHE_ENTRIES).toString())
+        : DEFAULT_MAX_TEMPLATE_CACHE_ENTRIES;
   }
 
   @SuppressWarnings("unchecked")
@@ -999,6 +1032,14 @@ public class CommandLineOptions implements Options {
     return true;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public Set<String> getSupportedProxyEncodings() {
+    return optionSet.has(SUPPORTED_PROXY_ENCODINGS)
+        ? Set.copyOf((List<String>) optionSet.valuesOf(SUPPORTED_PROXY_ENCODINGS))
+        : null;
+  }
+
   private boolean isAsynchronousResponseEnabled() {
     return optionSet.has(ASYNCHRONOUS_RESPONSE_ENABLED)
         && Boolean.parseBoolean((String) optionSet.valueOf(ASYNCHRONOUS_RESPONSE_ENABLED));
@@ -1006,5 +1047,12 @@ public class CommandLineOptions implements Options {
 
   private int getAsynchronousResponseThreads() {
     return Integer.parseInt((String) optionSet.valueOf(ASYNCHRONOUS_RESPONSE_THREADS));
+  }
+
+  @Override
+  public boolean getDisableConnectionReuse() {
+    return optionSet.has(DISABLE_CONNECTION_REUSE)
+        ? Boolean.parseBoolean((String) optionSet.valueOf(DISABLE_CONNECTION_REUSE))
+        : DEFAULT_DISABLE_CONNECTION_REUSE;
   }
 }

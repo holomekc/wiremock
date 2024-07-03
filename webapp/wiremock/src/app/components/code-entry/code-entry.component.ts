@@ -11,9 +11,9 @@ export class CodeEntryComponent {
 
   _code?: string;
   @Input()
-  set code(value: string | undefined) {
+  set code(value: any | undefined) {
     if (value) {
-      this._code = UtilService.prettify(String(value));
+      this._code = UtilService.prettify(value);
     } else {
       this._code = undefined;
     }

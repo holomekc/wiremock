@@ -26,7 +26,6 @@ export class WiremockService {
     return environment.url + path;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private static mapBody(body: any): string | null {
     if (body === null || typeof body === "undefined") {
       return null;
@@ -114,23 +113,24 @@ export class WiremockService {
   }
 
   getRecordingStatus(): Observable<RecordingStatus> {
-    return (
-      this.defaultPipe(this.http.get<RecordingStatus>(WiremockService.getUrl("recordings/status")))
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .pipe(map((status: any) => (<any>RecordingStatus)[status.status]))
-    );
+    return this.defaultPipe(this.http.get<RecordingStatus>(WiremockService.getUrl("recordings/status")))
+
+      .pipe(map((status: any) => (<any>RecordingStatus)[status.status]));
   }
 
   getVersion(): Observable<Version> {
     const options = {
       headers: {
-        "Accept": "application/json"
-      }
+        Accept: "application/json",
+      },
     };
-    return this.defaultPipe(this.http.get<Version>(WiremockService.getUrl('version'), options)
-      .pipe(map(v => {
-      return new Version(v.version, v.guiVersion);
-    })));
+    return this.defaultPipe(
+      this.http.get<Version>(WiremockService.getUrl("version"), options).pipe(
+        map(v => {
+          return new Version(v.version, v.guiVersion);
+        })
+      )
+    );
   }
 
   shutdown(): Observable<ResponseDefinition> {
@@ -141,15 +141,11 @@ export class WiremockService {
     return this.defaultPipe(this.http.get<ProxyConfig>(WiremockService.getUrl("proxy")));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   enableProxy(uuid: string): Observable<any> {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this.defaultPipe(this.http.put<any>(WiremockService.getUrl("proxy/" + uuid), null));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   disableProxy(uuid: string): Observable<any> {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this.defaultPipe(this.http.delete<any>(WiremockService.getUrl("proxy/" + uuid)));
   }
 
@@ -160,7 +156,7 @@ export class WiremockService {
   }
 
   getFile(fileName: string): Observable<string> {
-    return this.defaultPipe(this.http.get<string>(WiremockService.getUrl("files/" + fileName)));
+    return this.defaultPipe(this.http.get<any>(WiremockService.getUrl("files/" + fileName)));
   }
 
   downloadFile(fileName: string): Observable<string> {
@@ -193,12 +189,11 @@ export class WiremockService {
     return this.defaultPipe(this.http.delete<any>(WiremockService.getUrl("files/" + fileName)));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   test(
     path: string,
     method: string,
     body: any | undefined,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     headers: { [header: string]: string | string[] }
   ): Observable<HttpEvent<any>> {
     path = path.charAt(0) === "/" ? path.substring(1) : path;

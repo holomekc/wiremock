@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 Thomas Akehurst
+ * Copyright (C) 2016-2024 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,9 +73,9 @@ public class AdminRoutes {
     router.add(POST, "/mappings/import", new ImportStubMappingsTask());
 
     router.add(GET, "/files", new GetAllStubFilesTask(stores));
-    router.add(GET, "/files/**", GetStubFilesTask.class);
     router.add(PUT, "/files/**", new EditStubFileTask(stores));
     router.add(DELETE, "/files/**", new DeleteStubFileTask(stores));
+    router.add(GET, "/files/**", new GetStubFileTask(stores));
 
     router.add(GET, "/scenarios", new GetAllScenariosTask());
     router.add(POST, "/scenarios/reset", new ResetScenariosTask());

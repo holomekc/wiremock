@@ -3,7 +3,6 @@ import { UtilService } from "../../services/util.service";
 import { ProxyConfig } from "./proxy-config";
 
 export class ListStubMappingsResult {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta: any;
   mappings: StubMapping[] = [];
 

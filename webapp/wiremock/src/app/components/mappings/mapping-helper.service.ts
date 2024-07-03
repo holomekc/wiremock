@@ -154,13 +154,13 @@ export class MappingHelperService {
       mapping.serveEventListeners.push({
         name: "webhook",
         parameters: {
-          "method": "POST",
-          "url": "https://localhost",
-          "headers": {
-            "Content-Type": "application/json"
+          method: "POST",
+          url: "https://localhost",
+          headers: {
+            "Content-Type": "application/json",
           },
-          "body": "{}"
-        }
+          body: "{}",
+        },
       });
       return mapping;
     }

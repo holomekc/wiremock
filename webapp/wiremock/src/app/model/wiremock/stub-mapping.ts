@@ -4,7 +4,7 @@ import { Item } from "./item";
 import { UtilService } from "../../services/util.service";
 import { Proxy } from "./proxy";
 import { ProxyConfig } from "./proxy-config";
-import {ServeEventListenerDefinition} from './serve-event-listener-definition';
+import { ServeEventListenerDefinition } from "./serve-event-listener-definition";
 
 export class StubMapping extends Proxy implements Item {
   uuid!: string;
@@ -17,12 +17,10 @@ export class StubMapping extends Proxy implements Item {
   requiredScenarioState!: string;
   newScenarioState!: string;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   postServeActions!: Map<string, any>;
 
   serveEventListeners!: ServeEventListenerDefinition[];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata: any;
 
   constructor() {

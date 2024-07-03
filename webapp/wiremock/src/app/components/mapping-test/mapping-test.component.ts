@@ -208,14 +208,12 @@ export class MappingTestComponent implements OnChanges {
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private handleResponse(resp: HttpEvent<any>) {
     if (!resp) {
       this.responseBody = "";
       this.response = "";
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = {};
     data.type = HttpEventType[resp.type];
     switch (resp.type) {
@@ -245,7 +243,6 @@ export class MappingTestComponent implements OnChanges {
   }
 
   private handleErrorResponse(error: Error | HttpErrorResponse) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = {};
     data.type = error.name;
     data.message = error.message;
