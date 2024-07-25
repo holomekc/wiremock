@@ -74,7 +74,7 @@
     "@types/node": "20.14.12",
     "@types/uuid": "10.0.0",
     "@typescript-eslint/utils": "8.0.0-alpha.54",
-    "@typescript-eslint/eslint-plugin": "8.0.0-alpha.40",
+    "@typescript-eslint/eslint-plugin": "8.0.0-alpha.54",
     "@typescript-eslint/parser": "8.0.0-alpha.54",
     "eslint": "9.7.0",
     "eslint-config-prettier": "9.1.0",
