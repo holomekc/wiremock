@@ -29,7 +29,7 @@
     "@angular/forms": "18.2.12",
     "@angular/platform-browser": "18.2.12",
     "@angular/platform-browser-dynamic": "18.2.12",
-    "@angular/router": "18.2.12",
+    "@angular/router": "19.0.1",
     "@fortawesome/angular-fontawesome": "0.15.0",
     "@fortawesome/fontawesome-svg-core": "6.7.1",
     "@fortawesome/free-brands-svg-icons": "6.7.1",
