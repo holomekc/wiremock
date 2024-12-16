@@ -76,7 +76,7 @@
     "@typescript-eslint/utils": "8.18.0",
     "@typescript-eslint/eslint-plugin": "8.0.0-alpha.40",
     "@typescript-eslint/parser": "8.18.0",
-    "eslint": "9.16.0",
+    "eslint": "9.17.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-prettier": "5.2.1",
