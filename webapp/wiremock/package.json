@@ -32,7 +32,7 @@
     "@angular/router": "18.2.12",
     "@fortawesome/angular-fontawesome": "0.15.0",
     "@fortawesome/fontawesome-svg-core": "6.7.2",
-    "@fortawesome/free-brands-svg-icons": "6.7.1",
+    "@fortawesome/free-brands-svg-icons": "6.7.2",
     "@fortawesome/free-regular-svg-icons": "6.7.2",
     "@fortawesome/free-solid-svg-icons": "6.7.1",
     "@ng-bootstrap/ng-bootstrap": "17.0.1",
