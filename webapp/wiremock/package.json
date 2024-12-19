@@ -52,7 +52,7 @@
     "tslib": "2.8.1",
     "uuid": "11.0.3",
     "xml-formatter": "3.6.3",
-    "zone.js": "0.14.10"
+    "zone.js": "0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "18.2.12",
