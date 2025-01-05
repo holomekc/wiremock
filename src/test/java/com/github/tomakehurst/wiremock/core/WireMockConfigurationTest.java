@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 Thomas Akehurst
+ * Copyright (C) 2017-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.Optional;
-import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.junit.jupiter.api.Test;
 
 public class WireMockConfigurationTest {
@@ -60,19 +59,6 @@ public class WireMockConfigurationTest {
     WireMockConfiguration wireMockConfiguration = WireMockConfiguration.wireMockConfig();
     Optional<Long> jettyIdleTimeout = wireMockConfiguration.jettySettings().getIdleTimeout();
     assertThat(jettyIdleTimeout.isPresent(), is(false));
-  }
-
-  @Test
-  public void shouldUseQueuedThreadPoolByDefault() {
-    int maxThreads = 20;
-    WireMockConfiguration wireMockConfiguration =
-        WireMockConfiguration.wireMockConfig().containerThreads(maxThreads);
-
-    QueuedThreadPool threadPool =
-        (QueuedThreadPool)
-            wireMockConfiguration.threadPoolFactory().buildThreadPool(wireMockConfiguration);
-
-    assertThat(threadPool.getMaxThreads(), is(maxThreads));
   }
 
   @Test

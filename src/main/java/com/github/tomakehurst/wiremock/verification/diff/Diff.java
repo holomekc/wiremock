@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2024 Thomas Akehurst
+ * Copyright (C) 2016-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -297,6 +297,7 @@ public class Diff {
         String parameterName = entry.getKey();
         final String parameterValue = entry.getValue();
         final StringValuePattern pattern = pathParameters.get(parameterName);
+        if (pattern == null) continue;
         String operator = generateOperatorString(pattern, " = ");
         DiffLine<String> section =
             new DiffLine<>(

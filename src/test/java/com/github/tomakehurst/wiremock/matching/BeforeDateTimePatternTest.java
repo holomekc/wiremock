@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 Thomas Akehurst
+ * Copyright (C) 2021-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -284,6 +284,7 @@ public class BeforeDateTimePatternTest {
 
     assertThat(matcher.getExpected(), is("2021-06-15T00:00:00"));
     assertThat(matcher.getActualFormat(), is("dd/MM/yyyy"));
+    assertNull(matcher.getApplyTruncationLast());
   }
 
   @Test
@@ -292,12 +293,14 @@ public class BeforeDateTimePatternTest {
         Json.read(
             "{\n"
                 + "  \"before\": \"15 days\",\n"
-                + "  \"truncateActual\": \"first day of year\"\n"
+                + "  \"truncateActual\": \"first day of year\",\n"
+                + "  \"applyTruncationLast\": true\n"
                 + "}",
             BeforeDateTimePattern.class);
 
     assertThat(matcher.getTruncateExpected(), nullValue());
     assertThat(matcher.getTruncateActual(), is("first day of year"));
+    assertTrue(matcher.getApplyTruncationLast());
   }
 
   @Test

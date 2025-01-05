@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2024 Thomas Akehurst
+ * Copyright (C) 2016-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -557,5 +557,22 @@ class DiffTest {
             junitStyleDiffMessage(
                 "ANY\n" + "/thing\n" + "\n" + "$.accountNum [equalTo] 1234",
                 "ANY\n" + "/thing\n" + "\n" + "not json")));
+  }
+
+  @Test
+  void pathParametersWithNoMatcherAreNotRendered() {
+    Diff diff =
+        new Diff(
+            newRequestPattern(ANY, urlPathTemplate("/things/{thingId}/bookings/{bookingId}"))
+                .withPathParam("thingId", equalTo("1234"))
+                .build(),
+            mockRequest().url("/things/4321/bookings/whatever"));
+
+    assertThat(
+        diff.toString(),
+        is(
+            junitStyleDiffMessage(
+                "ANY\n/things/4321/bookings/whatever\n\nPath parameter: thingId = 1234\n",
+                "ANY\n/things/4321/bookings/whatever\n\n4321\n")));
   }
 }
