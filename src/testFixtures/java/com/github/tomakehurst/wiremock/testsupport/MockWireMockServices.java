@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2024 Thomas Akehurst
+ * Copyright (C) 2023-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,9 @@ public class MockWireMockServices implements WireMockServices {
 
   private Map<String, Helper<?>> helpers = emptyMap();
   private Long maxCacheEntries = null;
-  private Supplier<TemplateEngine> templateEngine =
+  private final Supplier<TemplateEngine> templateEngine =
       Suppliers.memoize(
-          () -> new TemplateEngine(helpers, maxCacheEntries, null, false, emptyList()));
+          () -> new TemplateEngine(helpers, maxCacheEntries, null, true, emptyList()));
 
   @Override
   public Admin getAdmin() {

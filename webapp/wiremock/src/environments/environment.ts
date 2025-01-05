@@ -5,7 +5,7 @@
 export const environment = {
   production: true,
   getWebSocket: (): WebSocket => {
-    return new WebSocket("ws://127.0.0.1:8088/__admin/events");
+    return new WebSocket("ws://127.0.0.1:8089/__admin/events");
   },
   wiremockUrl: "/",
   url: "/__admin/",

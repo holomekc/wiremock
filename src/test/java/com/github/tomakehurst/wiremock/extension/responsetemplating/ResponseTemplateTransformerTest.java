@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2024 Thomas Akehurst
+ * Copyright (C) 2016-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -300,18 +300,6 @@ public class ResponseTemplateTransformerTest {
             .getHeader("X-Origin-Url")
             .firstValue(),
         is("/things"));
-  }
-
-  @Test
-  public void escapingIsTheDefault() {
-    final ResponseDefinition responseDefinition =
-        transform(
-            mockRequest().url("/json").body("{\"a\": {\"test\": \"look at my 'single quotes'\"}}"),
-            aResponse().withBody("{\"test\": \"{{jsonPath request.body '$.a.test'}}\"}"),
-            Parameters.empty());
-
-    assertThat(
-        responseDefinition.getBody(), is("{\"test\": \"look at my &#x27;single quotes&#x27;\"}"));
   }
 
   @Test

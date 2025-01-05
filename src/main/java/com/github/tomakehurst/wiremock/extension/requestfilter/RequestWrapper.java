@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2024 Thomas Akehurst
+ * Copyright (C) 2018-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -169,7 +169,7 @@ public class RequestWrapper implements Request {
 
   @Override
   public boolean containsHeader(String key) {
-    return getHeaders().keys().contains(key);
+    return getHeaders().getHeader(key).isPresent();
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 Thomas Akehurst
+ * Copyright (C) 2017-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -264,6 +264,60 @@ public enum WireMockHelpers implements Helper<Object> {
 
   arrayJoin {
     private final JoinHelper helper = new JoinHelper();
+
+    @Override
+    public Object apply(Object context, Options options) throws IOException {
+      return helper.apply(context, options);
+    }
+  },
+
+  formatJson {
+    private final FormatJsonHelper helper = new FormatJsonHelper();
+
+    @Override
+    public Object apply(Object context, Options options) throws IOException {
+      return helper.apply(context, options);
+    }
+  },
+
+  formatXml {
+    private final FormatXmlHelper helper = new FormatXmlHelper();
+
+    @Override
+    public Object apply(Object context, Options options) throws IOException {
+      return helper.apply(context, options);
+    }
+  },
+
+  toJson {
+    private final ToJsonHelper helper = new ToJsonHelper();
+
+    @Override
+    public Object apply(Object context, Options options) throws IOException {
+      return helper.apply(context, options);
+    }
+  },
+
+  jsonMerge {
+    private final JsonMergeHelper helper = new JsonMergeHelper();
+
+    @Override
+    public Object apply(Object context, Options options) throws IOException {
+      return helper.apply(context, options);
+    }
+  },
+
+  jsonRemove {
+    private final JsonRemoveHelper helper = new JsonRemoveHelper();
+
+    @Override
+    public Object apply(Object context, Options options) throws IOException {
+      return helper.apply(context, options);
+    }
+  },
+
+  jsonArrayAdd {
+    private final JsonArrayAddHelper helper = new JsonArrayAddHelper();
 
     @Override
     public Object apply(Object context, Options options) throws IOException {

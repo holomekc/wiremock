@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2024 Thomas Akehurst
+ * Copyright (C) 2012-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -292,9 +292,8 @@ public class WireMockApp implements StubServer, Admin {
 
   private void loadDefaultMappings() {
     loadMappingsUsing(defaultMappingsLoader);
-    if (mappingsLoaderExtensions != null) {
+    if (mappingsLoaderExtensions != null)
       mappingsLoaderExtensions.values().forEach(e -> loadMappingsUsing(e));
-    }
   }
 
   public void loadMappingsUsing(final MappingsLoader mappingsLoader) {
@@ -604,21 +603,21 @@ public class WireMockApp implements StubServer, Admin {
   }
 
   @Override
-  public void startRecording(final String targetBaseUrl) {
+  public void startRecording(String targetBaseUrl) {
     recorder.startRecording(RecordSpec.forBaseUrl(targetBaseUrl));
 
     WebSocketEndpoint.broadcast(Message.RECORDING);
   }
 
   @Override
-  public void startRecording(final RecordSpec recordSpec) {
+  public void startRecording(RecordSpec recordSpec) {
     recorder.startRecording(recordSpec);
 
     WebSocketEndpoint.broadcast(Message.RECORDING);
   }
 
   @Override
-  public void startRecording(final RecordSpecBuilder recordSpec) {
+  public void startRecording(RecordSpecBuilder recordSpec) {
     recorder.startRecording(recordSpec.build());
 
     WebSocketEndpoint.broadcast(Message.RECORDING);
