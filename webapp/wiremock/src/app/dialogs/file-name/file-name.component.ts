@@ -5,6 +5,7 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
   selector: "wm-file-name",
   templateUrl: "./file-name.component.html",
   styleUrl: "./file-name.component.scss",
+  standalone: false,
 })
 export class FileNameComponent {
   fileName!: string;

@@ -12,6 +12,7 @@ import queryString from "query-string";
   selector: "wm-separated",
   templateUrl: "./separated.component.html",
   styleUrls: ["./separated.component.scss"],
+  standalone: false,
 })
 export class SeparatedComponent implements OnChanges {
   @HostBinding("class") classes = "wmHolyGrailScroll";

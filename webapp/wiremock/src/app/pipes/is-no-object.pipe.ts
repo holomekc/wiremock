@@ -4,6 +4,7 @@ import { UtilService } from "../services/util.service";
 
 @Pipe({
   name: "isNoObject",
+  standalone: false,
 })
 export class IsNoObjectPipe implements PipeTransform {
   transform(value: any): any {

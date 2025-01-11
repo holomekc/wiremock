@@ -17,6 +17,7 @@ import { of } from "rxjs";
   selector: "wm-files",
   templateUrl: "./files.component.html",
   styleUrl: "./files.component.scss",
+  standalone: false,
 })
 export class FilesComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "wmHolyGrailBody column";

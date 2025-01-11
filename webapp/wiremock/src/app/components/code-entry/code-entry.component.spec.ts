@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { CodeEntryComponent } from "./code-entry.component";
 
@@ -6,11 +6,11 @@ describe("CodeEntryComponent", () => {
   let component: CodeEntryComponent;
   let fixture: ComponentFixture<CodeEntryComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [CodeEntryComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CodeEntryComponent);

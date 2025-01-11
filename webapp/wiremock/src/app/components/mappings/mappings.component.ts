@@ -22,6 +22,7 @@ import { fromPromise } from "rxjs/internal/observable/innerFrom";
   selector: "wm-mappings",
   templateUrl: "./mappings.component.html",
   styleUrls: ["./mappings.component.scss"],
+  standalone: false,
 })
 export class MappingsComponent implements OnInit, OnDestroy, WebSocketListener {
   private static COPY_FAILURE = "Was not able to copy. Details in log";

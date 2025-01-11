@@ -18,6 +18,7 @@ import { Theme, ThemeService } from "../../services/theme.service";
   selector: "wm-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
+  standalone: false,
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "wmHolyGrailBody column";

@@ -5,6 +5,7 @@ import { Message, MessageService, MessageType } from "./message.service";
   selector: "wm-message",
   templateUrl: "./message.component.html",
   styleUrls: ["./message.component.scss"],
+  standalone: false,
 })
 export class MessageComponent {
   messages: Message[] = [];

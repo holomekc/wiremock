@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { StateMachineComponent } from "./state-machine.component";
 
@@ -6,11 +6,11 @@ describe("StateMachineComponent", () => {
   let component: StateMachineComponent;
   let fixture: ComponentFixture<StateMachineComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [StateMachineComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StateMachineComponent);

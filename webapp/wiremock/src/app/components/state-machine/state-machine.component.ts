@@ -18,6 +18,7 @@ import Graph = dia.Graph;
   selector: "wm-state-machine",
   templateUrl: "./state-machine.component.html",
   styleUrls: ["./state-machine.component.scss"],
+  standalone: false,
 })
 export class StateMachineComponent implements OnInit, OnChanges {
   private static readonly ANY = "{{ANY}}";

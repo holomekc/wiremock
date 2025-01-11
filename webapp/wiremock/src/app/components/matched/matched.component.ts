@@ -16,6 +16,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
   selector: "wm-matched",
   templateUrl: "./matched.component.html",
   styleUrls: ["./matched.component.scss"],
+  standalone: false,
 })
 export class MatchedComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "wmHolyGrailBody";

@@ -4,6 +4,8 @@ import { Message, MessageService, MessageType } from "../components/message/mess
 import { StubMapping } from "../model/wiremock/stub-mapping";
 import { v4 as uuidv4 } from "uuid";
 import xmlFormat from "xml-formatter";
+import { Ace } from "ace-builds";
+import EditorOptions = Ace.EditorOptions;
 
 @Injectable()
 export class UtilService {
@@ -365,14 +367,14 @@ export class UtilService {
     link.click();
   }
 
-  public static aceReadOnlyOptions() {
+  public static aceReadOnlyOptions(): Partial<EditorOptions> {
     return {
       selectionStyle: "text",
       highlightActiveLine: true, // readOnly
       highlightSelectedWord: true,
       readOnly: true, // readOnly
       cursorStyle: "ace",
-      mergeUndoDeltas: "true",
+      mergeUndoDeltas: true,
       behavioursEnabled: true,
       wrapBehavioursEnabled: true,
       copyWithEmptySelection: true,
@@ -381,7 +383,7 @@ export class UtilService {
       // ...
       highlightGutterLine: false,
       showPrintMargin: false,
-      printMarginColumn: false,
+      printMarginColumn: 0,
       printMargin: false,
       showGutter: true,
       displayIndentGuides: true,
@@ -394,14 +396,14 @@ export class UtilService {
     };
   }
 
-  public static aceWriteOptions() {
+  public static aceWriteOptions(): Partial<EditorOptions> {
     return {
       selectionStyle: "text",
       highlightActiveLine: true,
       highlightSelectedWord: true,
       readOnly: false,
       cursorStyle: "ace",
-      mergeUndoDeltas: "true",
+      mergeUndoDeltas: true,
       behavioursEnabled: true,
       wrapBehavioursEnabled: true,
       copyWithEmptySelection: true,
@@ -410,7 +412,7 @@ export class UtilService {
       // ...
       highlightGutterLine: false,
       showPrintMargin: false,
-      printMarginColumn: false,
+      printMarginColumn: 0,
       printMargin: false,
       showGutter: true,
       displayIndentGuides: true,

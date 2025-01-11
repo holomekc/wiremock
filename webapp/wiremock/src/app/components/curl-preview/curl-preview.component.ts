@@ -9,6 +9,7 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
   selector: "wm-curl-preview",
   templateUrl: "./curl-preview.component.html",
   styleUrls: ["./curl-preview.component.scss"],
+  standalone: false,
 })
 export class CurlPreviewComponent implements AfterViewInit {
   @ViewChild("editor")
