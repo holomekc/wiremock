@@ -9,22 +9,25 @@ import { Item } from "../../model/wiremock/item";
 import { ServeEvent } from "../../model/wiremock/serve-event";
 import { BehaviorSubject } from "rxjs";
 import { CodeEditorComponent } from "../code-editor/code-editor.component";
+import { Ace } from "ace-builds";
+import EditorOptions = Ace.EditorOptions;
 
 @Component({
   selector: "wm-mapping-test",
   templateUrl: "./mapping-test.component.html",
   styleUrls: ["./mapping-test.component.scss"],
+  standalone: false,
 })
 export class MappingTestComponent implements OnChanges {
   @HostBinding("class") classes = "wmHolyGrailBody";
 
-  codeOptions = {
+  codeOptions: Partial<EditorOptions> = {
     selectionStyle: "text",
     highlightActiveLine: true,
     highlightSelectedWord: true,
     readOnly: false,
     cursorStyle: "ace",
-    mergeUndoDeltas: "true",
+    mergeUndoDeltas: true,
     behavioursEnabled: true,
     wrapBehavioursEnabled: true,
     copyWithEmptySelection: true,
@@ -33,7 +36,7 @@ export class MappingTestComponent implements OnChanges {
     // ...
     highlightGutterLine: false,
     showPrintMargin: false,
-    printMarginColumn: false,
+    printMarginColumn: 0,
     printMargin: false,
     showGutter: true,
     displayIndentGuides: true,
@@ -45,13 +48,13 @@ export class MappingTestComponent implements OnChanges {
     enableMultiselect: true,
   };
 
-  codeReadOnlyOptions = {
+  codeReadOnlyOptions: Partial<EditorOptions> = {
     selectionStyle: "text",
     highlightActiveLine: true, // readOnly
     highlightSelectedWord: true,
     readOnly: true, // readOnly
     cursorStyle: "ace",
-    mergeUndoDeltas: "true",
+    mergeUndoDeltas: true,
     behavioursEnabled: true,
     wrapBehavioursEnabled: true,
     copyWithEmptySelection: true,
@@ -60,7 +63,7 @@ export class MappingTestComponent implements OnChanges {
     // ...
     highlightGutterLine: false,
     showPrintMargin: false,
-    printMarginColumn: false,
+    printMarginColumn: 0,
     printMargin: false,
     showGutter: true,
     displayIndentGuides: true,

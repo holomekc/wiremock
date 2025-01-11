@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ListViewComponent } from "./list-view.component";
 
@@ -6,11 +6,11 @@ describe("ListViewComponent", () => {
   let component: ListViewComponent;
   let fixture: ComponentFixture<ListViewComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ListViewComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListViewComponent);

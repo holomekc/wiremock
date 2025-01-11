@@ -16,6 +16,7 @@ import { ProxyConfig } from "../../model/wiremock/proxy-config";
   selector: "wm-state",
   templateUrl: "./state.component.html",
   styleUrls: ["./state.component.scss"],
+  standalone: false,
 })
 export class StateComponent implements OnInit, OnDestroy {
   @ViewChild("canvas")

@@ -3,6 +3,7 @@ import { UtilService } from "../services/util.service";
 
 @Pipe({
   name: "keys",
+  standalone: false,
 })
 export class KeysPipe implements PipeTransform {
   transform(value: any): any {

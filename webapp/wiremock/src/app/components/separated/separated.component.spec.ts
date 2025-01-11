@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { SeparatedComponent } from "./separated.component";
 
@@ -6,11 +6,11 @@ describe("SeparatedComponent", () => {
   let component: SeparatedComponent;
   let fixture: ComponentFixture<SeparatedComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [SeparatedComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SeparatedComponent);

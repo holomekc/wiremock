@@ -20,21 +20,23 @@ import { Ace } from "ace-builds";
 import { takeUntil } from "rxjs/operators";
 import { ThemeService } from "../../services/theme.service";
 import Editor = Ace.Editor;
+import EditorOptions = Ace.EditorOptions;
 
 @Component({
   selector: "wm-code-editor",
   templateUrl: "./code-editor.component.html",
   styleUrls: ["./code-editor.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CodeEditorComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-  public static DEFAULT_OPTIONS = {
+  public static DEFAULT_OPTIONS: Partial<EditorOptions> = {
     selectionStyle: "text",
     highlightActiveLine: true,
     highlightSelectedWord: true,
     readOnly: false,
     cursorStyle: "ace",
-    mergeUndoDeltas: "true",
+    mergeUndoDeltas: true,
     behavioursEnabled: true,
     wrapBehavioursEnabled: true,
     autoScrollEditorIntoView: true, // we need that
@@ -44,7 +46,7 @@ export class CodeEditorComponent implements OnInit, OnChanges, AfterViewInit, On
     // ...
     highlightGutterLine: false,
     showPrintMargin: false,
-    printMarginColumn: false,
+    printMarginColumn: 0,
     printMargin: false,
     showGutter: true,
     displayIndentGuides: true,

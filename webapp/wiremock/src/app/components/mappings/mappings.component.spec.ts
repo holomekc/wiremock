@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { MappingsComponent } from "./mappings.component";
 
@@ -6,11 +6,11 @@ describe("MappingsComponent", () => {
   let component: MappingsComponent;
   let fixture: ComponentFixture<MappingsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [MappingsComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MappingsComponent);

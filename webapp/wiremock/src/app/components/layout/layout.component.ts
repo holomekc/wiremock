@@ -24,6 +24,7 @@ import { Subject } from "rxjs/internal/Subject";
   selector: "wm-layout",
   templateUrl: "./layout.component.html",
   styleUrls: ["./layout.component.scss"],
+  standalone: false,
 })
 export class LayoutComponent implements OnInit, OnChanges, OnDestroy {
   @HostBinding("class") classes = "wmHolyGrailBody";

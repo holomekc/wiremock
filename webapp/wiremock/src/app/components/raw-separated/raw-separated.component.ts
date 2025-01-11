@@ -20,6 +20,7 @@ import { Subject } from "rxjs/internal/Subject";
   templateUrl: "./raw-separated.component.html",
   styleUrls: ["./raw-separated.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class RawSeparatedComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "wmHolyGrailBody column";

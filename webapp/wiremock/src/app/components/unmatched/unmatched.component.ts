@@ -16,6 +16,7 @@ import { CurlPreviewComponent } from "../curl-preview/curl-preview.component";
   selector: "wm-unmatched",
   templateUrl: "./unmatched.component.html",
   styleUrls: ["./unmatched.component.scss"],
+  standalone: false,
 })
 export class UnmatchedComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "wmHolyGrailBody";

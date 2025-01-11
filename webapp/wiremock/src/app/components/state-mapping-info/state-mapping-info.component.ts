@@ -6,6 +6,7 @@ import { StubMapping } from "../../model/wiremock/stub-mapping";
   selector: "wm-state-mapping-info",
   templateUrl: "./state-mapping-info.component.html",
   styleUrls: ["./state-mapping-info.component.scss"],
+  standalone: false,
 })
 export class StateMappingInfoComponent {
   @Input()

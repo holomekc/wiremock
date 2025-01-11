@@ -26,6 +26,7 @@ import { TreeHelper } from "./tree-helper";
   selector: "wm-tree-view",
   templateUrl: "./tree-view.component.html",
   styleUrls: ["./tree-view.component.scss"],
+  standalone: false,
 })
 export class TreeViewComponent implements OnChanges, AfterViewChecked {
   @HostBinding("class") classes = "wmHolyGrailBody column";
