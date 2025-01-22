@@ -1,0 +1,32 @@
+#login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  max-width: 750px;
+  padding: 20px;
+  margin: auto;
+}
+
+.form-control {
+  &.is-invalid, &.is-valid {
+    // fix issue with bootstrap and validation layout
+    padding-right: 12px;
+  }
+}
+
+:host {
+  width: 100%;
+  height: 100vh;
+}
+
+#wmLogo {
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+.login-card {
+  border-radius: 34px;
+  border-width: 2px;
+}

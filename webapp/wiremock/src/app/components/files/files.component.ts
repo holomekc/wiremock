@@ -86,6 +86,7 @@ export class FilesComponent implements OnInit, OnDestroy {
       next: fileList => {
         this.files = fileList.files;
       },
+      error: err => UtilService.showErrorMessage(this.messageService, err),
     });
   }
 

@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run WireMock auth" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="wiremock.Run" />
+    <module name="wiremock.main" />
+    <option name="PROGRAM_PARAMETERS" value="--port 8088 --admin-api-basic-auth test:test" />
+    <method v="2" />
+  </configuration>
+</component>

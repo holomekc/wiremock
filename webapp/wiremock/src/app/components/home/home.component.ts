@@ -13,6 +13,7 @@ import { WebSocketService } from "../../services/web-socket.service";
 import { debounceTime, takeUntil } from "rxjs/operators";
 import { AutoRefreshService } from "../../services/auto-refresh.service";
 import { Theme, ThemeService } from "../../services/theme.service";
+import { LoginService } from "../../services/login.service";
 
 @Component({
   selector: "wm-home",
@@ -39,6 +40,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   theme: Theme = "auto";
 
+  canLogout = false;
+
   constructor(
     private wiremockService: WiremockService,
     private messageService: MessageService,
@@ -47,7 +50,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private autoRefreshService: AutoRefreshService,
     private modalService: NgbModal,
     private router: Router,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -57,16 +61,27 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.webSocketService
       .observe("recording")
-      .pipe(takeUntil(this.ngUnsubscribe), debounceTime(100))
+      .pipe(debounceTime(100), takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.loadRecordingStatus();
       });
 
-    this.loadRecordingStatus();
-    this.loadVersion();
-
     this.themeService.setTheme(this.themeService.getPreferredTheme());
     this.theme = this.themeService.getPreferredTheme();
+
+    this.loginService.login$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(loggedIn => {
+      this.canLogout = loggedIn;
+      if (loggedIn) {
+        this.loadOnInit();
+      }
+    });
+
+    this.loadOnInit();
+  }
+
+  private loadOnInit() {
+    this.loadRecordingStatus();
+    this.loadVersion();
   }
 
   private loadRecordingStatus() {
@@ -205,5 +220,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   changeTheme(theme: Theme) {
     this.themeService.setTheme(theme);
     this.theme = this.themeService.getPreferredTheme();
+  }
+
+  logout() {
+    this.loginService.logout();
   }
 }
