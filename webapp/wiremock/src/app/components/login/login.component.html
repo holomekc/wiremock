@@ -1,0 +1,51 @@
+<div id="login-container">
+  <div class="card login-card p-md-4 p-3">
+    <div class="row g-0">
+      <div class="col-md-6 login-logo">
+        <div class="mb-1">
+          <a href="https://wiremock.org" target="_blank">
+            <img
+              class="img-fluid rounded-start"
+              id="wmLogo"
+              alt="WireMock"
+              [src]="'assets/img/wiremock-concept-icon-01.png'"
+          /></a>
+        </div>
+        <div class="mb-3">Welcome to wiremock-gui</div>
+      </div>
+      <div class="col-md-6">
+        <form class="row g-3" #form="ngForm" (ngSubmit)="login()">
+          <div class="col-12">
+            <label for="username" class="form-label">Username</label>
+            <input
+              #usernameInput="ngModel"
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              [(ngModel)]="username"
+              required
+              [class.is-invalid]="usernameInput.touched && usernameInput.invalid"
+              [class.is-valid]="usernameInput.valid" />
+          </div>
+          <div class="col-12">
+            <label for="password" class="form-label">Password</label>
+            <input
+              #passwordInput="ngModel"
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              required
+              [class.is-invalid]="passwordInput.touched && passwordInput.invalid"
+              [class.is-valid]="passwordInput.valid" />
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
