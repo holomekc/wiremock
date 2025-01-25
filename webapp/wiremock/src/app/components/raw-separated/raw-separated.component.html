@@ -7,13 +7,13 @@
     [animation]="false"
     class="nav-tabs">
     <li [ngbNavItem]="RAW" [disabled]="rawDisabled">
-      <a ngbNavLink>Raw</a>
+      <a ngbNavLink>JSON</a>
       <ng-template ngbNavContent>
         <ng-content select="wm-raw-separated-raw"></ng-content>
       </ng-template>
     </li>
     <li [ngbNavItem]="SEPARATED" [disabled]="separatedDisabled">
-      <a ngbNavLink>Separated</a>
+      <a ngbNavLink>Overview</a>
       <ng-template ngbNavContent>
         <ng-content select="wm-raw-separated-separated"></ng-content>
       </ng-template>
