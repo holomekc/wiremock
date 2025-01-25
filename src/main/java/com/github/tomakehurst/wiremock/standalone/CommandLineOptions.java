@@ -729,6 +729,13 @@ public class CommandLineOptions implements Options {
       return new BasicAuthenticator(parts[0], parts[1]);
     }
 
+    final String usernam = System.getenv("WIREMOCK_ADMIN_API_BASIC_AUTH_USERNAME");
+    final String password = System.getenv("WIREMOCK_ADMIN_API_BASIC_AUTH_PASSWORD");
+
+    if(usernam != null && password != null) {
+      return new BasicAuthenticator(usernam, password);
+    }
+
     return new NoAuthenticator();
   }
 

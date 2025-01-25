@@ -10,15 +10,21 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const loginService = inject(LoginService);
-    const creds = loginService.getCredentials();
 
-    const authHeader = "Basic " + btoa(`${creds.username}:${creds.password}`);
+    let authReq;
+    if (loginService.hasCredentials()) {
+      const creds = loginService.getCredentials();
 
-    const authReq = request.clone({
-      setHeaders: {
-        Authorization: authHeader,
-      },
-    });
+      const authHeader = "Basic " + btoa(`${creds.username}:${creds.password}`);
+
+      authReq = request.clone({
+        setHeaders: {
+          Authorization: authHeader,
+        },
+      });
+    } else {
+      authReq = request.clone();
+    }
 
     return next.handle(authReq).pipe(
       catchError((err: HttpResponse<any>) => {
