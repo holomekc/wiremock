@@ -406,7 +406,7 @@ public class Jetty11HttpServer extends JettyHttpServer {
     rewrite.setRewritePathInfo(true);
 
     RewriteRegexRule rewriteRule = new RewriteRegexRule();
-    rewriteRule.setRegex("/__admin/webapp/(mappings|matched|unmatched|state|files).*");
+    rewriteRule.setRegex("/__admin/webapp/(mappings|matched|unmatched|state|files|login).*");
     rewriteRule.setReplacement("/__admin/webapp/index.html");
     rewrite.addRule(rewriteRule);
 
