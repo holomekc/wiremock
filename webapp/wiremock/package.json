@@ -64,7 +64,7 @@
     "@angular/cli": "19.2.4",
     "@angular/compiler-cli": "19.2.3",
     "@angular/localize": "19.2.3",
-    "@eslint/eslintrc": "3.3.0",
+    "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.23.0",
     "@types/backbone": "1.4.23",
     "@types/dagre": "0.7.52",
