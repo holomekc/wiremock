@@ -74,7 +74,7 @@
     "@types/node": "22.14.0",
     "@types/uuid": "10.0.0",
     "@typescript-eslint/utils": "8.29.1",
-    "@typescript-eslint/eslint-plugin": "8.29.0",
+    "@typescript-eslint/eslint-plugin": "8.29.1",
     "@typescript-eslint/parser": "8.29.1",
     "eslint": "9.24.0",
     "eslint-config-prettier": "10.1.1",
