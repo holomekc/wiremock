@@ -3,6 +3,7 @@ export class RequestPattern {
   urlPattern?: string;
   urlPath?: string;
   urlPathPattern?: string;
+  urlPathTemplate?: string;
   method?: string;
 
   headers: any;

@@ -69,11 +69,14 @@ export class StubMapping extends Proxy implements Item {
   }
 
   getTitle(): string {
-    return (this.name ||
-      this.request.url ||
-      this.request.urlPattern ||
-      this.request.urlPath ||
-      this.request.urlPathPattern) as string;
+    return (
+      this.name ??
+      this.request.url ??
+      this.request.urlPattern ??
+      this.request.urlPath ??
+      this.request.urlPathPattern ??
+      this.request.urlPathTemplate
+    );
   }
 
   getSubtitle(): string {
