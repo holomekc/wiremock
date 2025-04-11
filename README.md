@@ -127,7 +127,7 @@ Therefore, check the official guide regarding configuration etc. The docker comp
 
 A short example of a compose file
 
-```
+```yaml
 version: "3"
 services:
   wiremock:
