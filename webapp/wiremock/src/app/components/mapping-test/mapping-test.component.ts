@@ -157,7 +157,8 @@ export class MappingTestComponent implements OnChanges {
         this.mapping.request.url ??
         this.mapping.request.urlPath ??
         this.mapping.request.urlPattern ??
-        this.mapping.request.urlPathPattern
+        this.mapping.request.urlPathPattern ??
+        this.mapping.request.urlPathTemplate
       );
     } else {
       return "";
