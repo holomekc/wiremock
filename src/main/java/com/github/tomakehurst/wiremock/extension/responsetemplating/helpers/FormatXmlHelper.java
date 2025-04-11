@@ -59,12 +59,13 @@ public class FormatXmlHelper extends AbstractFormattingHelper {
     return "XML";
   }
 
-  private final DocumentBuilderFactory documentBuilderFactory = Xml.newDocumentBuilderFactory();
+  private final DocumentBuilderFactory documentBuilderFactory =
+      Xml.DEFAULT_DOCUMENT_BUILDER_FACTORY;
 
   private final TransformerFactory transformerFactory;
 
   public FormatXmlHelper() {
-    TransformerFactory factory = TransformerFactory.newInstance();
+    TransformerFactory factory = TransformerFactory.newDefaultInstance();
     factory.setAttribute("indent-number", 2);
     factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
     factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");

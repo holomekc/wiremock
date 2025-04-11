@@ -60,11 +60,14 @@ class JsonMergeHelper extends HandlebarsHelper<Object> {
       return handleError("JSON to merge is not a JSON object ('" + jsonToMergeString + "')");
     }
 
-    merge((ObjectNode) baseJson, (ObjectNode) jsonToMerge);
+    boolean removeNulls =
+        options.hash.containsKey("removeNulls") && (boolean) options.hash.get("removeNulls");
+
+    merge((ObjectNode) baseJson, (ObjectNode) jsonToMerge, removeNulls);
     return Json.getObjectMapper().writeValueAsString(baseJson);
   }
 
-  private void merge(ObjectNode base, ObjectNode other) {
+  private void merge(ObjectNode base, ObjectNode other, boolean removeNulls) {
     for (Iterator<Map.Entry<String, JsonNode>> it = other.fields(); it.hasNext(); ) {
       Map.Entry<String, JsonNode> child = it.next();
       String fieldName = child.getKey();
@@ -72,12 +75,16 @@ class JsonMergeHelper extends HandlebarsHelper<Object> {
       if (childNodeToMerge instanceof ObjectNode) {
         JsonNode baseChildNode = base.get(fieldName);
         if (baseChildNode instanceof ObjectNode) {
-          merge((ObjectNode) baseChildNode, (ObjectNode) childNodeToMerge);
+          merge((ObjectNode) baseChildNode, (ObjectNode) childNodeToMerge, removeNulls);
         } else {
           base.replace(fieldName, childNodeToMerge);
         }
       } else {
-        base.replace(fieldName, childNodeToMerge);
+        if (removeNulls && childNodeToMerge.isNull()) {
+          base.remove(fieldName);
+        } else {
+          base.replace(fieldName, childNodeToMerge);
+        }
       }
     }
   }
