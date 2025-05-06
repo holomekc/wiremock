@@ -38,7 +38,7 @@
     "@ng-bootstrap/ng-bootstrap": "18.0.0",
     "ace-builds": "1.41.0",
     "backbone": "1.6.1",
-    "bootstrap": "5.3.5",
+    "bootstrap": "5.3.6",
     "dagre": "0.8.5",
     "graphlib": "2.1.8",
     "jointjs": "3.7.7",
