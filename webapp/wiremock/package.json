@@ -27,7 +27,7 @@
     "@angular/compiler": "19.2.13",
     "@angular/core": "19.2.13",
     "@angular/forms": "19.2.13",
-    "@angular/platform-browser": "19.2.13",
+    "@angular/platform-browser": "20.0.2",
     "@angular/platform-browser-dynamic": "19.2.13",
     "@angular/router": "19.2.13",
     "@fortawesome/angular-fontawesome": "1.0.0",
