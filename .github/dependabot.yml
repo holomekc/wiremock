@@ -16,18 +16,22 @@ updates:
       - Author
     versioning-strategy: increase
     groups:
+      angular-fortawesome:
+        patterns:
+        - "@angular*"
+        - "@fortawesome"
+        update-types:
+        - "major"
       angular:
         patterns:
         - "@angular*"
         update-types:
-        - "major"
         - "minor"
         - "patch"
       fortawesome:
         patterns:
         - "@fortawesome"
         update-types:
-        - "major"
         - "minor"
         - "patch"
     commit-message:
