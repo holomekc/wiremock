@@ -20,12 +20,14 @@ updates:
         patterns:
         - "@angular*"
         update-types:
+        - "major"
         - "minor"
         - "patch"
       fortawesome:
         patterns:
         - "@fortawesome"
         update-types:
+        - "major"
         - "minor"
         - "patch"
     commit-message:
