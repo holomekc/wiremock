@@ -1,7 +1,12 @@
 import { Item } from "./item";
 import { UtilService } from "../../services/util.service";
 import { Proxy } from "./proxy";
-import moment from "moment";
+import { format, Locale } from "date-fns";
+
+let allLocales: { [key: string]: Locale };
+import("date-fns/locale").then(locales => {
+  allLocales = locales;
+});
 
 export class LoggedRequest extends Proxy implements Item {
   url!: string;
@@ -67,11 +72,21 @@ export class LoggedRequest extends Proxy implements Item {
     this.bodyAsBase64 = unchecked.bodyAsBase64;
     this.browserProxyRequest = unchecked.browserProxyRequest;
     this.loggedDate = unchecked.loggedDate;
-    this.date = moment(this.loggedDate).format();
+
+    this.date = format(this.loggedDate, "P pppp", {
+      locale: this.getLocale(),
+    });
     this.protocol = unchecked.protocol;
     this.multiparts = unchecked.multiparts;
 
     return this;
+  }
+
+  private getLocale(): Locale {
+    const locale = navigator.language.replace("-", "");
+    const rootLocale = locale.substring(0, 2);
+
+    return allLocales[locale] || allLocales[rootLocale] || allLocales["enUS"];
   }
 
   getBodyFileName(): string | undefined {

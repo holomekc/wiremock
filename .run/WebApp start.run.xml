@@ -5,7 +5,7 @@
     <scripts>
       <script value="start" />
     </scripts>
-    <node-interpreter value="$PROJECT_DIR$/.gradle/nodejs/node-v20.15.0-darwin-arm64/bin/node" />
+    <node-interpreter value="$PROJECT_DIR$/.gradle/nodejs/node-v22.16.0-darwin-arm64/bin/node" />
     <package-manager value="$PROJECT_DIR$/.gradle/npm/npm-v10.2.5/lib/node_modules/npm/bin/npm-cli.js" />
     <envs />
     <method v="2" />

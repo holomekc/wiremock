@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest ]
-        jdk: [ 11 ]
+        jdk: [ 17 ]
     runs-on: ${{ matrix.os }}
     env:
       JDK_VERSION: ${{ matrix.jdk }}
