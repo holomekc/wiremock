@@ -438,8 +438,8 @@ task addGitTag {
 }
 
 node {
-  version = "20.15.0"
-  npmVersion = "10.7.0"
+  version = "22.16.0"
+  npmVersion = "10.9.2"
   nodeProjectDir = file(projectDir.getAbsolutePath() + '/webapp/wiremock')
   download = true
 }
