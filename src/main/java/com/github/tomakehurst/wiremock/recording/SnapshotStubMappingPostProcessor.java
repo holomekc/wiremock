@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2023 Thomas Akehurst
+ * Copyright (C) 2017-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,24 +33,35 @@ import java.util.List;
  *   <li>Detect duplicate requests and either discard them or turn them into scenarios.
  *   <li>Extract response bodies to a separate file, if applicable.
  * </ol>
+ *
+ * @deprecated This class will become non-public in the next major version. If you rely on it,
+ *     please contact the maintainers.
  */
+@SuppressWarnings("DeprecatedIsStillUsed")
+@Deprecated(forRemoval = true)
 public class SnapshotStubMappingPostProcessor {
   private final boolean shouldRecordRepeatsAsScenarios;
+
+  @SuppressWarnings("removal")
   private final SnapshotStubMappingTransformerRunner transformerRunner;
+
   private final ResponseDefinitionBodyMatcher bodyExtractMatcher;
+
+  @SuppressWarnings("removal")
   private final SnapshotStubMappingBodyExtractor bodyExtractor;
 
   public SnapshotStubMappingPostProcessor(
       boolean shouldRecordRepeatsAsScenarios,
-      SnapshotStubMappingTransformerRunner transformerRunner,
+      @SuppressWarnings("removal") SnapshotStubMappingTransformerRunner transformerRunner,
       ResponseDefinitionBodyMatcher bodyExtractMatcher,
-      SnapshotStubMappingBodyExtractor bodyExtractor) {
+      @SuppressWarnings("removal") SnapshotStubMappingBodyExtractor bodyExtractor) {
     this.shouldRecordRepeatsAsScenarios = shouldRecordRepeatsAsScenarios;
     this.transformerRunner = transformerRunner;
     this.bodyExtractMatcher = bodyExtractMatcher;
     this.bodyExtractor = bodyExtractor;
   }
 
+  @SuppressWarnings("removal")
   public List<StubMapping> process(Collection<StubMapping> stubMappings) {
     // 1. Run any applicable StubMappingTransformers against the stub mappings.
     List<StubMapping> transformedStubMappings =
@@ -81,6 +92,7 @@ public class SnapshotStubMappingPostProcessor {
     return processedStubMappings;
   }
 
+  @SuppressWarnings("removal")
   private void extractStubMappingBodies(List<StubMapping> stubMappings) {
     if (bodyExtractMatcher == null) {
       return;

@@ -106,6 +106,7 @@ public class Diff {
 
     addHostSectionIfPresent(diffLineList);
     addPortSectionIfPresent(diffLineList);
+    addClientIpSectionIfPresent(diffLineList);
     addSchemeSectionIfPresent(diffLineList);
     addMethodSection(diffLineList);
     UrlPattern urlPattern = getFirstNonNull(requestPattern.getUrlMatcher(), anyUrl());
@@ -348,6 +349,17 @@ public class Diff {
       DiffLine<String> portSection =
           new DiffLine<>("Port", expectedPort, actualPort, expectedPort.getExpected());
       diffLineList.addAll(toDiffDescriptionLines(portSection));
+    }
+  }
+
+  private void addClientIpSectionIfPresent(List<DiffLine<?>> diffLineList) {
+    if (requestPattern.getClientIp() != null) {
+      StringValuePattern expectedClientIp = equalTo(String.valueOf(requestPattern.getClientIp()));
+      String actualClientIp = request.getClientIp();
+      DiffLine<String> clientIpSection =
+          new DiffLine<>(
+              "ClientIp", expectedClientIp, actualClientIp, expectedClientIp.getExpected());
+      diffLineList.addAll(toDiffDescriptionLines(clientIpSection));
     }
   }
 

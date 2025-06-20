@@ -310,4 +310,9 @@ public class WarConfiguration implements Options {
   public Set<String> getSupportedProxyEncodings() {
     return null;
   }
+
+  @Override
+  public int getWebhookThreadPoolSize() {
+    return DEFAULT_WEBHOOK_THREADPOOL_SIZE;
+  }
 }

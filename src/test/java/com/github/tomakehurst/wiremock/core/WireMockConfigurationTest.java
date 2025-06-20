@@ -16,6 +16,7 @@
 package com.github.tomakehurst.wiremock.core;
 
 import static com.github.tomakehurst.wiremock.core.Options.DEFAULT_MAX_TEMPLATE_CACHE_ENTRIES;
+import static com.github.tomakehurst.wiremock.core.Options.DEFAULT_WEBHOOK_THREADPOOL_SIZE;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -78,5 +79,17 @@ public class WireMockConfigurationTest {
   void maxTemplateCacheEntriesDefaultsWhenNotSpecified() {
     Options config = WireMockConfiguration.wireMockConfig();
     assertThat(config.getMaxTemplateCacheEntries(), is(DEFAULT_MAX_TEMPLATE_CACHE_ENTRIES));
+  }
+
+  @Test
+  void setsWebhookThreadpoolSize() {
+    Options config = WireMockConfiguration.wireMockConfig().withWebhookThreadPoolSize(1000);
+    assertThat(config.getWebhookThreadPoolSize(), is(1000));
+  }
+
+  @Test
+  void webhookThreadpoolSizeWhenNotSpecified() {
+    Options config = WireMockConfiguration.wireMockConfig();
+    assertThat(config.getWebhookThreadPoolSize(), is(DEFAULT_WEBHOOK_THREADPOOL_SIZE));
   }
 }

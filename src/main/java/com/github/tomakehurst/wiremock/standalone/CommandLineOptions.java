@@ -131,6 +131,7 @@ public class CommandLineOptions implements Options {
   private static final String DISABLE_CONNECTION_REUSE = "disable-connection-reuse";
   private static final String PROXY_PASS_THROUGH = "proxy-pass-through";
   private static final String SUPPORTED_PROXY_ENCODINGS = "supported-proxy-encodings";
+  private static final String WEBHOOK_THREADPOOL_SIZE = "webhook-threadpool-size";
 
   private final OptionSet optionSet;
 
@@ -398,6 +399,9 @@ public class CommandLineOptions implements Options {
         .withRequiredArg()
         .ofType(String.class)
         .withValuesSeparatedBy(",");
+    optionParser
+        .accepts(WEBHOOK_THREADPOOL_SIZE, "The size of the webhook thread pool")
+        .withRequiredArg();
 
     optionParser.accepts(VERSION, "Prints wiremock version information and exits");
 
@@ -732,7 +736,7 @@ public class CommandLineOptions implements Options {
     final String usernam = System.getenv("WIREMOCK_ADMIN_API_BASIC_AUTH_USERNAME");
     final String password = System.getenv("WIREMOCK_ADMIN_API_BASIC_AUTH_PASSWORD");
 
-    if(usernam != null && password != null) {
+    if (usernam != null && password != null) {
       return new BasicAuthenticator(usernam, password);
     }
 
@@ -1066,5 +1070,12 @@ public class CommandLineOptions implements Options {
     return optionSet.has(DISABLE_CONNECTION_REUSE)
         ? Boolean.parseBoolean((String) optionSet.valueOf(DISABLE_CONNECTION_REUSE))
         : DEFAULT_DISABLE_CONNECTION_REUSE;
+  }
+
+  @Override
+  public int getWebhookThreadPoolSize() {
+    return optionSet.has(WEBHOOK_THREADPOOL_SIZE)
+        ? Integer.parseInt((String) optionSet.valueOf(WEBHOOK_THREADPOOL_SIZE))
+        : DEFAULT_WEBHOOK_THREADPOOL_SIZE;
   }
 }
