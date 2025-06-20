@@ -637,6 +637,27 @@ public class WireMockApp implements StubServer, Admin {
     return new RecordingStatusResult(recorder.getStatus().name());
   }
 
+  private Set<UUID> findMatchedStubIds() {
+    return requestJournal.getAllServeEvents().stream()
+        .filter(event -> event.getStubMapping() != null)
+        .map(event -> event.getStubMapping().getId())
+        .collect(Collectors.toSet());
+  }
+
+  @Override
+  public ListStubMappingsResult findUnmatchedStubs() {
+    // Collect IDs of stub mappings that have matched at least one request in a HashSet for O(1)
+    // lookups so this method is O(n + m), where n is the number of stubs and m is the number of
+    // requests in the journal.
+    // It'd be slightly more efficient to use IdentityHashMap, but that's error-prone.
+    Set<UUID> servedStubIds = findMatchedStubIds();
+    List<StubMapping> foundMappings =
+        stubMappings.getAll().stream()
+            .filter(stub -> !servedStubIds.contains(stub.getId()))
+            .collect(Collectors.toList());
+    return new ListStubMappingsResult(LimitAndOffsetPaginator.none(foundMappings));
+  }
+
   @Override
   public ListStubMappingsResult findAllStubsByMetadata(StringValuePattern pattern) {
     return new ListStubMappingsResult(

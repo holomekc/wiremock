@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2023 Thomas Akehurst
+ * Copyright (C) 2017-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.github.tomakehurst.wiremock.recording;
 
+import static com.github.tomakehurst.wiremock.common.ParameterUtils.getFirstNonNull;
+
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.common.*;
 import com.github.tomakehurst.wiremock.common.filemaker.FilenameMaker;
@@ -23,9 +25,13 @@ import com.github.tomakehurst.wiremock.http.HttpHeaders;
 import com.github.tomakehurst.wiremock.store.BlobStore;
 import com.github.tomakehurst.wiremock.stubbing.StubMapping;
 
+@SuppressWarnings("DeprecatedIsStillUsed")
+@Deprecated(forRemoval = true)
 public class SnapshotStubMappingBodyExtractor {
   private final BlobStore filesBlobStore;
 
+  @SuppressWarnings("DeprecatedIsStillUsed")
+  @Deprecated(forRemoval = true)
   public SnapshotStubMappingBodyExtractor(BlobStore filesBlobStore) {
     this.filesBlobStore = filesBlobStore;
   }
@@ -36,12 +42,15 @@ public class SnapshotStubMappingBodyExtractor {
    *
    * @param stubMapping Stub mapping to extract
    */
+  @SuppressWarnings("DeprecatedIsStillUsed")
+  @Deprecated(forRemoval = true)
   public void extractInPlace(StubMapping stubMapping) {
     byte[] body = stubMapping.getResponse().getByteBody();
     HttpHeaders responseHeaders = stubMapping.getResponse().getHeaders();
     String extension =
         ContentTypes.determineFileExtension(
-            stubMapping.getRequest().getUrl(),
+            getFirstNonNull(
+                stubMapping.getRequest().getUrl(), stubMapping.getRequest().getUrlPath()),
             responseHeaders != null
                 ? responseHeaders.getContentTypeHeader()
                 : ContentTypeHeader.absent(),

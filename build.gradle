@@ -22,12 +22,14 @@ plugins {
   id 'project-report'
   id 'com.diffplug.spotless' version '6.25.0'
   id 'com.github.johnrengelman.shadow' version '8.1.1'
-  id "org.sonarqube" version "6.0.1.5171"
+  id "org.sonarqube" version "6.2.0.5505"
   id 'jacoco'
   id "me.champeau.jmh" version "0.7.3"
-  id 'com.dorongold.task-tree' version '4.0.0'
-  id 'com.github.node-gradle.node' version '7.0.2'
+  id 'com.dorongold.task-tree' version '4.0.1'
+  id 'com.github.node-gradle.node' version '7.1.0'
 }
+
+apply from: "buildSchema.gradle"
 
 group = 'org.wiremock'
 
@@ -35,11 +37,11 @@ project.ext {
   versions = [
     handlebars     : '4.3.1',
     jetty          : '11.0.24',
-    guava          : '33.4.0-jre',
-    jackson        : '2.18.3',
-    xmlUnit        : '2.10.0',
+    guava          : '33.4.8-jre',
+    jackson        : '2.19.0',
+    xmlUnit        : '2.10.2',
     jsonUnit       : '2.40.1',
-    junitJupiter   : '5.12.0'
+    junitJupiter   : '5.13.1'
   ]
 }
 
@@ -76,7 +78,7 @@ dependencies {
       "com.fasterxml.jackson.core:jackson-annotations",
       "com.fasterxml.jackson.core:jackson-databind",
       "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
-  api "org.apache.httpcomponents.client5:httpclient5:5.4.2"
+  api "org.apache.httpcomponents.client5:httpclient5:5.5"
   api "org.xmlunit:xmlunit-core:$versions.xmlUnit"
   api "org.xmlunit:xmlunit-legacy:$versions.xmlUnit", {
     exclude group: 'junit', module: 'junit'
@@ -106,9 +108,9 @@ dependencies {
     exclude group: 'org.apache.commons', module: 'commons-lang3'
   }
 
-  api 'commons-fileupload:commons-fileupload:1.5'
+  api 'commons-fileupload:commons-fileupload:1.6.0'
 
-  api 'com.networknt:json-schema-validator:1.5.6'
+  api 'com.networknt:json-schema-validator:1.5.7'
 
   testFixturesApi("org.junit.jupiter:junit-jupiter:$versions.junitJupiter")
   testFixturesApi("org.junit.platform:junit-platform-testkit")
@@ -117,18 +119,18 @@ dependencies {
   testFixturesApi('org.junit-pioneer:junit-pioneer:2.3.0')
   testFixturesApi "org.hamcrest:hamcrest-core:3.0"
   testFixturesApi "org.hamcrest:hamcrest-library:3.0"
-  testFixturesApi 'org.mockito:mockito-core:5.15.2'
-  testFixturesApi 'org.mockito:mockito-junit-jupiter:5.15.2'
+  testFixturesApi 'org.mockito:mockito-core:5.18.0'
+  testFixturesApi 'org.mockito:mockito-junit-jupiter:5.18.0'
   testFixturesApi "net.javacrumbs.json-unit:json-unit:$versions.jsonUnit"
   testFixturesApi "org.skyscreamer:jsonassert:1.5.1"
   testFixturesApi 'com.toomuchcoding.jsonassert:jsonassert:0.8.0'
   testFixturesApi 'org.awaitility:awaitility:4.3.0'
-  testFixturesApi "commons-io:commons-io:2.18.0"
+  testFixturesApi "commons-io:commons-io:2.19.0"
 
   testImplementation "junit:junit:4.13.2"
   testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
   testImplementation 'org.scala-lang:scala-library:2.13.16'
-  testImplementation 'com.tngtech.archunit:archunit-junit5:0.23.1'
+  testImplementation 'com.tngtech.archunit:archunit-junit5:1.4.1'
 
   testImplementation "org.eclipse.jetty:jetty-client"
   testImplementation "org.eclipse.jetty.http2:http2-http-client-transport"
@@ -138,12 +140,6 @@ dependencies {
 
   testImplementation 'org.openjdk.jmh:jmh-core:1.37'
   testImplementation 'org.openjdk.jmh:jmh-generator-annprocess:1.37'
-
-  constraints {
-    implementation "net.minidev:json-smart:2.5.2", {
-      because 'Pinning this above the transitive version from json-path to get CVE fix'
-    }
-  }
 }
 
 allprojects {
@@ -546,7 +542,7 @@ task 'set-snapshot-version' {
   doLast {
 
     def currentVersion = project.version
-    def nextVersion = "${majorVersion}.${minorVersion + 1}.0-SNAPSHOT"
+    def nextVersion = project.findProperty('snapshotVersion') ?: "${majorVersion}.${minorVersion + 1}.0-SNAPSHOT"
 
     updateFiles(currentVersion, nextVersion)
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2023 Thomas Akehurst
+ * Copyright (C) 2017-2025 Thomas Akehurst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.github.tomakehurst.wiremock.recording;
 
+import static com.github.tomakehurst.wiremock.common.ParameterUtils.getFirstNonNull;
+
 import com.github.tomakehurst.wiremock.common.Urls;
 import com.github.tomakehurst.wiremock.matching.RequestPattern;
 import com.github.tomakehurst.wiremock.stubbing.Scenario;
@@ -23,8 +25,12 @@ import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("DeprecatedIsStillUsed")
+@Deprecated(forRemoval = true)
 public class ScenarioProcessor {
 
+  @SuppressWarnings("DeprecatedIsStillUsed")
+  @Deprecated(forRemoval = true)
   public void putRepeatedRequestsInScenarios(List<StubMapping> stubMappings) {
     Map<RequestPattern, List<StubMapping>> stubsGroupedByRequest =
         stubMappings.stream()
@@ -60,7 +66,11 @@ public class ScenarioProcessor {
         "scenario-"
             + scenarioIndex
             + "-"
-            + Urls.urlToPathParts(URI.create(firstScenario.getRequest().getUrl()));
+            + Urls.urlToPathParts(
+                URI.create(
+                    getFirstNonNull(
+                        firstScenario.getRequest().getUrl(),
+                        firstScenario.getRequest().getUrlPath())));
 
     int count = 1;
     for (StubMapping stub : stubMappings) {

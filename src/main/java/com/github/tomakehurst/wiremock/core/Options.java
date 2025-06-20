@@ -48,6 +48,7 @@ public interface Options {
   int DEFAULT_CONTAINER_THREADS = 25;
   String DEFAULT_BIND_ADDRESS = "0.0.0.0";
   int DEFAULT_MAX_HTTP_CONNECTIONS = 1000;
+  int DEFAULT_WEBHOOK_THREADPOOL_SIZE = 10;
   boolean DEFAULT_DISABLE_CONNECTION_REUSE = true;
   Long DEFAULT_MAX_TEMPLATE_CACHE_ENTRIES = 1000L;
 
@@ -160,4 +161,6 @@ public interface Options {
   Set<String> getSupportedProxyEncodings();
 
   boolean getDisableConnectionReuse();
+
+  int getWebhookThreadPoolSize();
 }

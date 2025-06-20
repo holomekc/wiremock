@@ -169,7 +169,10 @@ public class Extensions implements WireMockServices {
         ofType(WebhookTransformer.class).values().stream().collect(Collectors.toUnmodifiableList());
 
     final Webhooks webhooks =
-        new Webhooks(this, Executors.newScheduledThreadPool(10), webhookTransformers);
+        new Webhooks(
+            this,
+            Executors.newScheduledThreadPool(options.getWebhookThreadPoolSize()),
+            webhookTransformers);
     loadedExtensions.put(webhooks.getName(), webhooks);
   }
 

@@ -498,6 +498,21 @@ class DiffTest {
   }
 
   @Test
+  void includeClientIpIfSpecified() {
+    Diff diff =
+        new Diff(
+            newRequestPattern(ANY, anyUrl()).withClientIp(equalTo("192.168.1.1")).build(),
+            mockRequest().clientIp("192.168.2.2").url("/thing"));
+
+    assertThat(
+        diff.toString(),
+        is(
+            junitStyleDiffMessage(
+                "equalTo 192.168.1.1\n" + "ANY\n" + "/thing\n",
+                "192.168.2.2\n" + "ANY\n" + "/thing\n")));
+  }
+
+  @Test
   void includePortIfSpecified() {
     Diff diff =
         new Diff(
