@@ -87,7 +87,7 @@
     "karma-coverage": "2.2.1",
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
-    "prettier": "3.6.1",
+    "prettier": "3.6.2",
     "prettier-eslint": "16.4.2",
     "typescript": "5.8.3"
   }
