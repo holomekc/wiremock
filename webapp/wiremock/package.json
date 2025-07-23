@@ -34,7 +34,7 @@
     "@fortawesome/fontawesome-svg-core": "6.7.2",
     "@fortawesome/free-brands-svg-icons": "6.7.2",
     "@fortawesome/free-regular-svg-icons": "6.7.2",
-    "@fortawesome/free-solid-svg-icons": "6.7.2",
+    "@fortawesome/free-solid-svg-icons": "7.0.0",
     "@ng-bootstrap/ng-bootstrap": "19.0.1",
     "ace-builds": "1.43.2",
     "backbone": "1.6.1",
