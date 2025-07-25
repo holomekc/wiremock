@@ -2,8 +2,12 @@ import { Item } from "./item";
 import { UtilService } from "../../services/util.service";
 import { Proxy } from "./proxy";
 import { format, Locale } from "date-fns";
+import { enUS, de } from "date-fns/locale";
 
-let allLocales: { [key: string]: Locale };
+let allLocales: { [key: string]: Locale } = {
+  enUS: enUS,
+  de: de,
+};
 import("date-fns/locale").then(locales => {
   allLocales = locales;
 });
@@ -86,7 +90,7 @@ export class LoggedRequest extends Proxy implements Item {
     const locale = navigator.language.replace("-", "");
     const rootLocale = locale.substring(0, 2);
 
-    return allLocales[locale] || allLocales[rootLocale] || allLocales["enUS"];
+    return allLocales[locale] || allLocales[rootLocale] || allLocales["enUS"] || enUS;
   }
 
   getBodyFileName(): string | undefined {
