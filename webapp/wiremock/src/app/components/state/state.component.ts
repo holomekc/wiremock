@@ -5,7 +5,6 @@ import { Subject } from "rxjs";
 import { WiremockService } from "../../services/wiremock.service";
 import { WebSocketService } from "../../services/web-socket.service";
 import { Message, MessageService, MessageType } from "../message/message.service";
-import { TabSelectionService } from "../../services/tab-selection.service";
 import { AutoRefreshService } from "../../services/auto-refresh.service";
 import { UtilService } from "../../services/util.service";
 import { Scenario } from "../../model/wiremock/scenario";
@@ -33,7 +32,6 @@ export class StateComponent implements OnInit, OnDestroy {
     private wiremockService: WiremockService,
     private webSocketService: WebSocketService,
     private messageService: MessageService,
-    private tabSelectionService: TabSelectionService,
     private autoRefreshService: AutoRefreshService
   ) {}
 
@@ -96,6 +94,19 @@ export class StateComponent implements OnInit, OnDestroy {
     this.wiremockService.resetScenarios().subscribe({
       next: () => {
         this.messageService.setMessage(new Message("Reset of all scenarios successful", MessageType.INFO));
+        this.loadScenarios();
+      },
+      error: err => {
+        UtilService.showErrorMessage(this.messageService, err);
+      },
+    });
+  }
+
+  setScenarioState(scenario: Scenario, state: string) {
+    this.wiremockService.setScenario(scenario.id, state).subscribe({
+      next: () => {
+        this.messageService.setMessage(new Message("Scenario state set succesfully", MessageType.INFO));
+        this.loadScenarios();
       },
       error: err => {
         UtilService.showErrorMessage(this.messageService, err);
