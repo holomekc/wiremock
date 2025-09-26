@@ -83,6 +83,15 @@ export class WiremockService {
     return this.defaultPipe(this.http.post<ResponseDefinition>(WiremockService.getUrl("scenarios/reset"), null));
   }
 
+  setScenario(scenario: string, state: string): Observable<ResponseDefinition> {
+    return this.defaultPipe(
+      this.http.put<ResponseDefinition>(
+        WiremockService.getUrl(`scenarios/${scenario}/state`),
+        WiremockService.mapBody({ state })
+      )
+    );
+  }
+
   getRequests(): Observable<GetServeEventsResult> {
     return this.defaultPipe(this.http.get<GetServeEventsResult>(WiremockService.getUrl("requests")));
   }

@@ -1,15 +1,26 @@
 <wm-layout [items]="result ? result : []">
   <ng-template #actions let-activeItem>
     <div ngbDropdown class="btn-group" role="group">
-      <button id="wmScenarioDrop" type="button" class="btn btn-secondary dropdown-toggle" ngbDropdownToggle>
-        Scenarios
+      <button id="wmScenarioStateDrop" type="button" class="btn btn-secondary dropdown-toggle" ngbDropdownToggle>
+        Set Scenario
       </button>
       <div ngbDropdownMenu class="dropdown-menu">
-        <button type="button" class="dropdown-item" (click)="resetAllScenarios()">
-          <fa-icon icon="sync-alt"></fa-icon>
-          Reset all Scenarios
+        <button
+          *ngFor="let state of activeItem?.possibleStates ? activeItem.possibleStates : []"
+          [id]="state"
+          type="button"
+          class="dropdown-item"
+          [disabled]="state === activeItem.state"
+          (click)="setScenarioState(activeItem, state)">
+          {{ state }}
         </button>
       </div>
+    </div>
+    <div id="wmScenarioSection" ngbDropdown class="btn-group" role="group">
+      <button id="wmScenarioDrop" type="button" class="btn btn-secondary" (click)="resetAllScenarios()">
+        <fa-icon icon="sync-alt"></fa-icon>
+        Reset all Scenarios
+      </button>
     </div>
   </ng-template>
   <ng-template #content let-activeItem>
