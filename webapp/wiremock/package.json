@@ -71,7 +71,7 @@
     "@types/graphlib": "2.1.12",
     "@types/jasmine": "5.1.10",
     "@types/mime-db": "1.43.6",
-    "@types/node": "24.7.2",
+    "@types/node": "24.8.0",
     "@types/uuid": "11.0.0",
     "@typescript-eslint/utils": "8.46.1",
     "@typescript-eslint/eslint-plugin": "8.46.1",
