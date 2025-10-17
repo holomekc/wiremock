@@ -69,7 +69,7 @@
     "@types/backbone": "1.4.23",
     "@types/dagre": "0.7.53",
     "@types/graphlib": "2.1.12",
-    "@types/jasmine": "5.1.10",
+    "@types/jasmine": "5.1.11",
     "@types/mime-db": "1.43.6",
     "@types/node": "24.8.0",
     "@types/uuid": "11.0.0",
