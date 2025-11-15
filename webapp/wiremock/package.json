@@ -63,7 +63,7 @@
     "@angular-eslint/template-parser": "20.3.0",
     "@angular/cli": "20.3.10",
     "@angular/compiler-cli": "20.3.1",
-    "@angular/localize": "20.3.1",
+    "@angular/localize": "20.3.11",
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.39.1",
     "@types/backbone": "1.4.23",
