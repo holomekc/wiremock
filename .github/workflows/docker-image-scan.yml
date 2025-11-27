@@ -158,11 +158,13 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-result.sarif'
+          category: 'docker-image-scan'
 
       - name: Upload Trivy alpine scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: 'trivy-result-alpine.sarif'
+          category: 'docker-image-scan-alpine'
 
   docker:
     needs: [scan]
