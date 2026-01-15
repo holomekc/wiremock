@@ -79,7 +79,7 @@
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prefer-arrow": "1.2.3",
-    "eslint-plugin-prettier": "5.5.4",
+    "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-unused-imports": "4.3.0",
     "jasmine-core": "5.13.0",
     "karma": "6.4.4",
