@@ -42,7 +42,7 @@
     "dagre": "0.8.5",
     "graphlib": "2.1.8",
     "jointjs": "3.7.7",
-    "jquery": "3.7.1",
+    "jquery": "4.0.0",
     "lodash": "4.17.21",
     "mime-db": "1.54.0",
     "date-fns": "4.1.0",
