@@ -65,7 +65,7 @@
     "@angular/compiler-cli": "20.3.1",
     "@angular/localize": "20.3.1",
     "@eslint/eslintrc": "3.3.3",
-    "@eslint/js": "9.39.2",
+    "@eslint/js": "10.0.1",
     "@types/backbone": "1.4.23",
     "@types/dagre": "0.7.53",
     "@types/graphlib": "2.1.12",
