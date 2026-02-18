@@ -56,7 +56,7 @@ jobs:
           path: .trivy
           key: ${{ runner.os }}-trivy-db-${{ steps.trivy-db.outputs.sha }}
       - name: Run Trivy json result
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           image-ref: 'docker.io/holomekc/wiremock-gui:${{ steps.extract-version.outputs.version }}'
           format: 'json'
@@ -68,7 +68,7 @@ jobs:
           hide-progress: true
           cache-dir: .trivy
       - name: Run Trivy sarif result
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           image-ref: 'docker.io/holomekc/wiremock-gui:${{ steps.extract-version.outputs.version }}'
           format: 'sarif'
@@ -81,7 +81,7 @@ jobs:
           hide-progress: true
           cache-dir: .trivy
       - name: Run Trivy sbom result
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           image-ref: 'docker.io/holomekc/wiremock-gui:${{ steps.extract-version.outputs.version }}'
           format: 'github'
@@ -94,7 +94,7 @@ jobs:
           cache-dir: .trivy
           github-pat: ${{ secrets.GITHUB_TOKEN }}
       - name: Run Trivy json result alpine
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           image-ref: 'docker.io/holomekc/wiremock-gui:${{ steps.extract-version.outputs.version }}-alpine'
           format: 'json'
@@ -106,7 +106,7 @@ jobs:
           hide-progress: true
           cache-dir: .trivy
       - name: Run Trivy sarif result alpine
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           image-ref: 'docker.io/holomekc/wiremock-gui:${{ steps.extract-version.outputs.version }}-alpine'
           format: 'sarif'
@@ -119,7 +119,7 @@ jobs:
           hide-progress: true
           cache-dir: .trivy
       - name: Run Trivy sbom result alpine
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           image-ref: 'docker.io/holomekc/wiremock-gui:${{ steps.extract-version.outputs.version }}-alpine'
           format: 'github'
