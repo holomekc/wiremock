@@ -357,7 +357,7 @@ export class UtilService {
     }
   }
 
-  public static downloadFileContent(fileName: string, content: string) {
+  public static downloadFileContent(fileName: string, content: BlobPart) {
     const blob = new Blob([content]);
 
     const downloadURL = URL.createObjectURL(blob);
