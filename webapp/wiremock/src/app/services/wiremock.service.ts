@@ -168,10 +168,10 @@ export class WiremockService {
     return this.defaultPipe(this.http.get(WiremockService.getUrl("files/" + fileName), { responseType: "text" }));
   }
 
-  downloadFile(fileName: string): Observable<string> {
-    return this.defaultPipe(this.http.get(WiremockService.getUrl("files/" + fileName), { responseType: "text" })).pipe(
+  downloadFile(fileName: string): Observable<Blob> {
+    return this.defaultPipe(this.http.get(WiremockService.getUrl("files/" + fileName), { responseType: "blob" })).pipe(
       tap(body => {
-        UtilService.downloadFileContent(fileName, WiremockService.mapBody(body) ?? "");
+        UtilService.downloadFileContent(fileName, body);
       })
     );
   }
